@@ -9,6 +9,14 @@ class teamController {
     const teams = await TeamService.getTeams();
     return res.status(200).json(teams);
   }
+
+  static async getTeamById(req: Request, res: Response) {
+    const { id } = req.params;
+    // console.log('afafafa');
+    const team = await TeamService.getTeamById(Number(id));
+    // if (!team) return res.status(404).json({ message: 'Team does not exist' });
+    return res.status(200).json(team);
+  }
 }
 
 export default teamController;

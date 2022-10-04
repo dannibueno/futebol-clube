@@ -23,8 +23,6 @@ class LoginController {
 
     // console.log(user.password);
 
-    // const token = await validaToken(email);
-
     const checkPassword = await bcrypt.compare(password, user.password);
 
     if (!checkPassword) {
