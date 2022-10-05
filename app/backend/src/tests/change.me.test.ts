@@ -12,16 +12,39 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-const dumpLogin = {
-  email: 'admin@admin.com',
-  password: 'secret_admin',
-}
-
 describe('/login', () => {
   describe('POST', () => {
-    it('Deve logar com sucesso', async() => {
-      const response = await chai.request(app).post('/login').send(dumpLogin);
+    it('Testa se o loga com sucesso', async() => {
+      const response = await chai.request(app).post('/login').send({
+      
+        email: 'admin@admin.com',
+        password: 'secret_admin',
+      });
+      
       expect(response.status).to.equal(200);
+      expect(response.body).to.have.property('token');
+    });
+
+    it('Testa erro para email e senha não valido', async() => {
+      const response = await chai.request(app).post('/login').send({
+        email: 'testando@testando.com',
+        password: '12345',
+
+      });
+      expect(response.status).to.equal(401);
+      expect(response.body).to.have.key('message');
+      expect(response.body.message).to.equal('Incorrect email or password');
+    });
+
+    it('Testa erro para campo de login vazio ', async() => {
+      const response = await chai.request(app).post('/login').send({
+        email: '',
+        password: '',
+
+      });
+      expect(response.status).to.equal(400);
+      expect(response.body).to.have.key('message');
+      expect(response.body.message).to.equal('All fields must be filled');
     });
   });
 });
