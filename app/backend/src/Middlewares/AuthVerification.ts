@@ -29,7 +29,7 @@ const AuthVerification = async (req: Request, res: Response, next: NextFunction)
   } catch (err) {
     return res
       .status(401)
-      .json({ message: 'Expired or invalid token' });
+      .json({ message: 'Token must be a valid token' });
   }
 };
 

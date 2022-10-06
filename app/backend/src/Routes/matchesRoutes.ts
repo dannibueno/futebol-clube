@@ -1,4 +1,5 @@
 import { Router, Request, Response } from 'express';
+import AuthVerification from '../Middlewares/AuthVerification';
 import MatchController from '../Controllers/matchController';
 
 const routers: Router = Router();
@@ -7,7 +8,7 @@ routers.get('/matches', (req: Request, res: Response) => {
   MatchController.getAllMatches(req, res);
 });
 
-routers.post('/matches', (req: Request, res: Response) => {
+routers.post('/matches', AuthVerification, (req: Request, res: Response) => {
   MatchController.create(req, res);
 });
 
