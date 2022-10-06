@@ -51,6 +51,17 @@ class matchController {
     await MatchService.finishMatch(id);
     return res.status(200).json({ message: 'Finished' });
   }
+
+  static async updateGoalsTeam(req: Request<{ id: number }, unknown>, res: Response) {
+    const { id } = req.params;
+    // console.log(id);
+    await MatchService.updateGoalsTeam(
+      id,
+      req.body.homeTeamGoals,
+      req.body.awayTeamGoals,
+    );
+    return res.status(200).json({ message: 'Successful' });
+  }
 }
 
 export default matchController;

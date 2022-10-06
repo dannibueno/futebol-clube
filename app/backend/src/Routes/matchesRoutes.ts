@@ -18,4 +18,12 @@ routers.patch(
     MatchController.finishMatch(req, res);
   },
 );
+
+routers.patch(
+  '/matches/:id',
+  (req: Request<{ id: number }, unknown>, res: Response) => {
+    MatchController.updateGoalsTeam(req, res);
+  },
+);
+
 export default routers;

@@ -6,6 +6,7 @@ import chaiHttp = require('chai-http');
 import { app } from '../app';
 import Example from '../database/models/ExampleModel';
 import Team from '../database/models/Team';
+import Match from '../database/models/Match';
 
 import { Response } from 'superagent';
 

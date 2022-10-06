@@ -64,6 +64,19 @@ class MatchService {
     );
     return Updated;
   }
+
+  static async updateGoalsTeam(id: number, homeTeamGoals: number, awayTeamGoals: number) {
+    const Updated = await MatchModel.update(
+      {
+        homeTeamGoals,
+        awayTeamGoals,
+      },
+      {
+        where: { id },
+      },
+    );
+    return Updated;
+  }
 }
 
 export default MatchService;
