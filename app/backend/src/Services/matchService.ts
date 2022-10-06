@@ -40,6 +40,30 @@ class MatchService {
     });
     return result as IMatch[];
   }
+
+  static async create(newMatch: IMatch): Promise<IMatch> {
+    console.log('dfafafa');
+    const result: IMatch = await MatchModel.create({
+      homeTeam: newMatch.homeTeam,
+      homeTeamGoals: newMatch.homeTeamGoals,
+      awayTeam: newMatch.awayTeam,
+      awayTeamGoals: newMatch.awayTeamGoals,
+      inProgress: newMatch.inProgress,
+    });
+    return result;
+  }
+
+  static async finishMatch(id: number) {
+    const Updated = await MatchModel.update(
+      {
+        inProgress: false,
+      },
+      {
+        where: { id },
+      },
+    );
+    return Updated;
+  }
 }
 
 export default MatchService;

@@ -14,7 +14,6 @@ class teamController {
     const { id } = req.params;
     // console.log('afafafa');
     const team = await TeamService.getTeamById(Number(id));
-    // if (!team) return res.status(404).json({ message: 'Team does not exist' });
     return res.status(200).json(team);
   }
 }
