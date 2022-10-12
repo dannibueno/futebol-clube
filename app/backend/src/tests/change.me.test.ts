@@ -81,3 +81,24 @@ describe('/Rota teams', () => {
     });
   });
 });
+
+
+describe('/Rota Matches', () => {
+  describe('Testa a rota macthes/id ', () => {
+    beforeEach( async () => {
+      sinon
+        .stub(Match, 'update')
+        .resolves();
+    });
+
+    afterEach(() => {
+      (Match.update as sinon.SinonStub).restore();
+    });
+
+    it('Teste a rota matches/id em caso de sucesso', async () => {
+      const result = await chai.request(app).patch('/matches/1');
+      expect(result.status).to.equal(200);
+      expect(result.body).to.have.property('message');
+    });
+  });
+});
